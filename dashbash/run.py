@@ -11,4 +11,4 @@ if __name__ == '__main__':
     # In production, setting `app.debug = False` will disable the toolbar.
     toolbar = DebugToolbarExtension(app)
     # Werkzeug, WSGI utility library for Python, enable module reloader
-    app.run(use_reloader=True)
+    app.run(use_reloader=True, reloader_interval=0, use_debugger=True, reloader_type='watchdog')
