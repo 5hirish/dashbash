@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify, json
 
 # ********** Views **************
 
@@ -28,7 +28,12 @@ def get_current_user():
 
 @app.route('/')
 def home_page():
-    return render_template('index.html')
+    home_data = {
+        'title': 'DashBash',
+        'text': 'Welcome to your Dasboard'
+    }
+
+    return render_template('index.html', title='DashBash', result=json.dumps(home_data))
 
 # ********** BluePrints ***********
 
