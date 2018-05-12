@@ -8,6 +8,12 @@ from dashbash.views import dashboard_view
 app_name = 'dashbash'
 app = Flask(__name__)
 
+if app.env == 'development' or app.env == 'testing':
+    # Rename the dashbash/config/config_dev.py.example to config_dev.py
+    app.config.from_object('dashbash.config.config_dev')
+
+# app.logger.info('ENV:{0}'.format(app.config['ENV']))
+
 
 @app.errorhandler(404)
 def not_found(error):
