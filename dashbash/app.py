@@ -2,7 +2,9 @@ from flask import Flask, render_template
 
 # ********** Views **************
 
-from dashbash import user, dashboard
+from dashbash.user.views import user_blueprint
+from dashbash.dashboard.views import dashboard_blueprint
+from dashbash.home.views import home_blueprint
 from dashbash.settings import ProdConfig
 from dashbash.extensions import csrf_protect, db, debug_toolbar
 
@@ -39,8 +41,9 @@ def register_extensions(app):
 
 def register_blueprints(app):
     """Register Flask blueprints."""
-    app.register_blueprint(user.views.user_blue_print)
-    app.register_blueprint(dashboard.views.dashboard_blue_print)
+    app.register_blueprint(home_blueprint)
+    app.register_blueprint(user_blueprint)
+    app.register_blueprint(dashboard_blueprint)
     # app_dasbash.register_blueprint(user_blue_print)
     # app_dasbash.register_blueprint(dashboard_blue_print)
     return None
@@ -59,7 +62,7 @@ def register_error_handlers(app):
 
 # @app_dasbash.errorhandler(404)
 # def not_found(error):
-#     return render_template('err_404.html'), 404
+#     return render_template('404.html'), 404
 
 
 # Load User Before request

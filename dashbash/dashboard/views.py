@@ -1,22 +1,21 @@
 from flask import Blueprint, request, redirect, render_template, jsonify, url_for
 from dashbash.dashboard.models import Notes, Tags
-#from dashbash.database import psg_db as db
 
 blue_print_name = 'dashboard'
 blue_print_prefix = '/dashboard'
 
-dashboard_blue_print = Blueprint(blue_print_name, __name__, url_prefix=blue_print_prefix)
+dashboard_blueprint = Blueprint(blue_print_name, __name__, url_prefix=blue_print_prefix)
 
 
-@dashboard_blue_print.route('/')
+@dashboard_blueprint.route('/')
 def show_user_dashboard():
     # It accepts the name of the function as its first argument and any number of keyword arguments,
     # each corresponding to a variable part of the URL rule.
     # Unknown variable parts are appended to the URL as query parameters.
-    return redirect(url_for('home_page'))
+    return redirect(url_for('home.home_page'))
 
 
-@dashboard_blue_print.route('/note', method=['POST'])
+@dashboard_blueprint.route('/note', methods=['POST'])
 def insert_note():
     if request.method == 'POST':
         if 'title' in request.form:
