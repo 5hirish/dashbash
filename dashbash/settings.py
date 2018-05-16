@@ -17,6 +17,8 @@ class Config:
     DB_DRIVER = 'psycopg2'
     DB_NAME = 'dashbash'
 
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
 
 class ProdConfig(Config):
     """Production configuration."""
@@ -32,7 +34,7 @@ class ProdConfig(Config):
     DB_PORT = '5433'
 
     SQLALCHEMY_DATABASE_URI = Config.DB_DIALECT + '+' + Config.DB_DRIVER + '://' \
-                              + DB_USERNAME + '@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME
+                              + DB_USERNAME + ':' + DB_PASSWORD +'@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME
 
 
 class DevConfig(Config):
@@ -48,7 +50,9 @@ class DevConfig(Config):
     DB_PORT = '5433'
 
     SQLALCHEMY_DATABASE_URI = Config.DB_DIALECT + '+' + Config.DB_DRIVER + '://' \
-                              + DB_USERNAME + '@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME
+                              + DB_USERNAME + ':' + DB_PASSWORD + '@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME
+
+    SQLALCHEMY_ECHO = True
 
 
 class TestConfig(Config):
@@ -67,4 +71,4 @@ class TestConfig(Config):
     DB_PORT = '5433'
 
     SQLALCHEMY_DATABASE_URI = Config.DB_DIALECT + '+' + Config.DB_DRIVER + '://' \
-                              + DB_USERNAME + '@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME
+                              + DB_USERNAME + ':' + DB_PASSWORD + '@' + DB_HOSTNAME + ':' + DB_PORT + '/' + Config.DB_NAME

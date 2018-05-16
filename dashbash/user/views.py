@@ -10,7 +10,7 @@ user_blueprint = Blueprint(blue_print_name, __name__, url_prefix=blue_print_url_
 
 @user_blueprint.route('/')
 def hello_world():
-    return 'Hello User!'
+    return jsonify({'title': 'Hi, User!'})
 
 
 @user_blueprint.route('/login', methods=['GET', 'POST'])

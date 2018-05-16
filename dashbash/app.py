@@ -6,7 +6,7 @@ from dashbash.user.views import user_blueprint
 from dashbash.dashboard.views import dashboard_blueprint
 from dashbash.home.views import home_blueprint
 from dashbash.settings import ProdConfig
-from dashbash.extensions import csrf_protect, db, debug_toolbar
+from dashbash.extensions import db, debug_toolbar, migrate
 
 app_name = 'dashbash'
 
@@ -31,10 +31,10 @@ def register_extensions(app):
     # bcrypt.init_app(app)
     # cache.init_app(app)
     db.init_app(app)
-    csrf_protect.init_app(app)
+    # csrf_protect.init_app(app)
     # login_manager.init_app(app)
     debug_toolbar.init_app(app)
-    # migrate.init_app(app, db)
+    migrate.init_app(app, db)
     # webpack.init_app(app)
     return None
 
