@@ -6,15 +6,15 @@ blue_print_name = 'user'
 blue_print_url_prefix = '/user'
 blue_print_templates = 'templates/user'
 
-app = Blueprint(blue_print_name, __name__, url_prefix=blue_print_url_prefix)
+user_blue_print = Blueprint(blue_print_name, __name__, url_prefix=blue_print_url_prefix)
 
 
-@app.route('/')
+@user_blue_print.route('/')
 def hello_world():
     return 'Hello User!'
 
 
-@app.route('/login', methods=['GET', 'POST'])
+@user_blue_print.route('/login', methods=['GET', 'POST'])
 def oauth_login_providers():
     if request.method == 'POST':
         return 'hi'

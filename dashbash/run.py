@@ -1,20 +1,22 @@
 import sys
-from dashbash.app import app
-from flask_debugtoolbar import DebugToolbarExtension
+from flask.helpers import get_debug_flag
+from dashbash.app import create_app
+from dashbash.settings import DevConfig, ProdConfig
 
 if __name__ == '__main__':
+
+    app_config = DevConfig if get_debug_flag() else ProdConfig
+    app = create_app(app_config)
 
     # the toolbar is only enabled in debug mode:
     app.debug = True
     # set a 'SECRET_KEY' to enable the Flask session cookies in debug toolbar
-    app.config['SECRET_KEY'] = 'shirish-dashbash'
     # The toolbar will automatically be injected into HTML responses when debug mode is on.
     # In production, setting `app.debug = False` will disable the toolbar.
-    toolbar = DebugToolbarExtension(app)
 
     logformat = "[%(asctime)s] %(levelname)s:%(name)s:%(message)s"
     app.logging.basicConfig(level=app.logging.DEBUG, stream=sys.stdout,
-                        format=logformat, datefmt="%Y-%m-%d %H:%M:%S")
+                                    format=logformat, datefmt="%Y-%m-%d %H:%M:%S")
 
     # app.logging.getLogger('urllib3').setLevel(app.logging.CRITICAL)
     app.logger = app.logging.getLogger(__name__)
