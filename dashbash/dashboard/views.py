@@ -55,9 +55,10 @@ def insert_note():
         for note in all_notes:
             tag_name = []
             for tag in note.tags:
-                tag_name.append(Session.query(Tags).filter_by(tId=tag.tagId).all())
+                tag_list = Session.query(Tags).filter_by(tId=tag.tagId).all()
+                tag_name.append(tag_list[0].tag)
 
-            note_json = {"title": note.title, "tags": tag_name}
+            note_json = {"title": note.title, "content": note.content, "date": note.createDate, "tags": tag_name}
             notes.append(note_json)
 
         return jsonify({"status": "success", "data": notes}), 200
