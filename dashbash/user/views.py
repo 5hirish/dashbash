@@ -1,4 +1,5 @@
 from flask import Blueprint, request, render_template, jsonify
+from dashbash.tasks.user_tasks import add_together
 
 blue_print_name = 'user'
 # blue_print_version = 'v1'
@@ -19,3 +20,9 @@ def oauth_login_providers():
         return 'hi'
     else:
         return 'show login'
+
+
+@user_blueprint.route('/task')
+def combine_result():
+    result = add_together.delay(23, 42)
+    return jsonify({"result": result.wait()})

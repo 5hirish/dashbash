@@ -17,6 +17,9 @@ class Config:
     DB_DRIVER = 'psycopg2'
     DB_NAME = 'dashbash'
 
+    CELERY_BROKER_URL = 'redis://localhost:6379/0'
+    CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 

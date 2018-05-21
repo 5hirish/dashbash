@@ -7,7 +7,7 @@ from dashbash.dashboard.views import dashboard_blueprint
 from dashbash.home.views import home_blueprint
 from dashbash.settings import ProdConfig
 from dashbash.extensions import db, debug_toolbar, migrate
-
+from worker import create_task_queue
 app_name = 'dashbash'
 
 
@@ -21,6 +21,7 @@ def create_app(config_object=ProdConfig):
     register_extensions(app)
     register_blueprints(app)
     register_error_handlers(app)
+    create_task_queue(app)
     # register_shellcontext(app)
     # register_commands(app)
     return app
@@ -59,6 +60,7 @@ def register_error_handlers(app):
     for errcode in [401, 404, 500]:
         app.errorhandler(errcode)(render_error)
     return None
+
 
 # @app_dasbash.errorhandler(404)
 # def not_found(error):
